@@ -2,11 +2,10 @@ import { tweetsData } from './data.js'
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 const replyModal = document.getElementById("reply-modal")
-const closeReplyModalBtn = document.getElementById("close-reply-modal-btn")
 
 document.addEventListener('click', function(e){
     if(e.target.dataset.like){
-       handleLikeClick(e.target.dataset.like) 
+       handleLikeClick(e.target.dataset.like)
     }
     else if(e.target.dataset.retweet){
         handleRetweetClick(e.target.dataset.retweet)
@@ -20,8 +19,8 @@ document.addEventListener('click', function(e){
         replyBtn()
     }
 })
- 
-function handleLikeClick(tweetId){ 
+
+function handleLikeClick(tweetId){
     const targetTweetObj = tweetsData.filter(function(tweet){
         return tweet.uuid === tweetId
     })[0]
@@ -30,7 +29,7 @@ function handleLikeClick(tweetId){
         targetTweetObj.likes--
     }
     else{
-        targetTweetObj.likes++ 
+        targetTweetObj.likes++
     }
     targetTweetObj.isLiked = !targetTweetObj.isLiked
     render()
@@ -40,7 +39,7 @@ function handleRetweetClick(tweetId){
     const targetTweetObj = tweetsData.filter(function(tweet){
         return tweet.uuid === tweetId
     })[0]
-    
+
     if(targetTweetObj.isRetweeted){
         targetTweetObj.retweets--
     }
@@ -48,21 +47,18 @@ function handleRetweetClick(tweetId){
         targetTweetObj.retweets++
     }
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted
-    render() 
+    render()
 }
 
-function handleReplyClick(replyId){
-    replyModal.style.display = "inline"
+ function handleReplyClick(replyId){
     document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
-}
+ }
 
-closeReplyModalBtn.addEventListener("click", () => {
-    replyModal.style.display = "none"
-})
+
 
 function replyBtn() {
     const replyTweet = document.getElementById('reply-tweet-input')
-    
+
     tweetsData.forEach((tweet) => {
         if(replyTweet.value) {
             tweet.replies.unshift({
@@ -73,8 +69,8 @@ function replyBtn() {
             })
             render()
             replyTweet.value = ''
-            replyModal.style.display = "none"
             
+
         }
     })
 
@@ -105,23 +101,23 @@ function handleTweetBtnClick(){
 
 function getFeedHtml(){
     let feedHtml = ``
-    
+
     tweetsData.forEach(function(tweet){
-        
+
         let likeIconClass = ''
-        
+
         if (tweet.isLiked){
             likeIconClass = 'liked'
         }
-        
+
         let retweetIconClass = ''
-        
+
         if (tweet.isRetweeted){
             retweetIconClass = 'retweeted'
         }
-        
+
         let repliesHtml = ''
-        
+
         if(tweet.replies.length > 0){
             tweet.replies.forEach(function(reply){
                 repliesHtml+=`
@@ -137,8 +133,8 @@ function getFeedHtml(){
                 `
             })
         }
-        
-          
+
+
         feedHtml += `
             <div class="tweet">
                 <div class="tweet-inner">
@@ -165,21 +161,20 @@ function getFeedHtml(){
                                 ></i>
                                 ${tweet.retweets}
                             </span>
-                        </div>   
-                    </div>            
+                        </div>
+                    </div>
                 </div>
                 <div class="hidden" id="replies-${tweet.uuid}">
                     ${repliesHtml}
-                </div>   
+                </div>
             </div>
 
         `
    })
-   return feedHtml 
+   return feedHtml
 }
 
 function render(){
     document.getElementById('feed').innerHTML = getFeedHtml()
 }
-
 render()

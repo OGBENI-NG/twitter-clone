@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -133,25 +136,6 @@ button{
     display: none;
 }
 
-/*reply modal container*/
-.reply-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    width: 255px;
-    border: 1px solid darkgray;
-    padding: 15px;
-    height: 220px;
-    background: #fff;
-    border-radius: 8px;
-
-}
-
-
 .text-area-container {
     margin-top: 40px;
     width: 235px;
@@ -173,13 +157,7 @@ button{
     box-shadow: 0px 0px 5px #1DA1F2;
 }
 
-#user-reply {
-    color: #1DA1F2;
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 9px;
 
-} 
 
 
 .reply-tweet-container {
@@ -204,28 +182,4 @@ button{
     color: #3a86ff;
     background: #e5e5e5;
     transform: translateY(4px);
-}
-
-.close-modal-btn-container {
-    position: absolute;
-    margin-left: 220px;
-    
-}
-
-#close-reply-modal-btn {
-    display: block;
-    background-color: #e5e5e5;
-    font-weight: bolder;
-    border-radius: 50%;
-    border: none;
-    height: 35px;
-    width: 35px;
-    padding: 0;
-    color: rgba(0, 0, 0, 0.641)
-    
-}
-
-#close-reply-modal-btn:hover {
-    color: red;
-    background: #2f3e4695;
 }
